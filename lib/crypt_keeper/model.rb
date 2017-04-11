@@ -92,7 +92,7 @@ module CryptKeeper
         end
 
         transaction do
-          tmp_table.find_each do |r|
+          tmp_table.find_each(5000) do |r|
             crypt_keeper_fields.each do |field|
               r.send("#{field}=", enc.encrypt(r[field])) if r[field].present?
             end
